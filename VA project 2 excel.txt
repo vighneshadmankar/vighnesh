@@ -1,0 +1,65 @@
+#Q3A
+
+Sub MultipleConditional FormattingExample ()
+Dim KyRange As Range
+*Create range oblect
+Set MyRange = Range ("AL:DR307512")
+*Delete previous conditional formats
+Myrange. FormatConditions. Delete
+"Add First vale
+MyRange.FormatConditions,Add Type: xicelivalue, Operator:-xiBetveen.
+Pormalal:»"»100%, Pormula2:»" 150*
+MyRange. FormatConditions (1). Interior, color » RGB4255, 0, 0)
+*Add second muse
+MyRange. FormatConditions.Add Type: xiceliValue, Operator: xiless
+Formulal:=*-100-
+MyRange. FormatConditions (2) . Interior.Color # voBlue
+MyRange. Pormatconditions.Add Type: xicellValue, Operator: #xIGreate:
+Formula::="=150-
+MyRange. FormatConditions (3) . Interior.color a vbYellow
+End Sub
+
+
+
+
+#Q3b) VBA Code to convert selected data into pdf from applicant data:
+
+Sub PDFconversion()
+Dim r As Range
+Dim s As String
+
+If Selection.Count = 1 Then
+Set r = Application.InputBox("Select a range", "Get Range", Type:=8)
+Else
+Set r = Selection
+End If
+
+strfile = "Selection" & "_" _
+& Format(Now(), "yyyymmdd_hhmmss") _
+& ".pdf"
+strfile = ThisWorkbook.Path & "\" & strfile
+
+myfile = Application.GetSaveAsFilename _
+(InitialFileName:=strfile, _
+FileFilter:="PDF Files (*.pdf), *.pdf", _
+Title:="Select Folder and File Name to Save as PDF")
+If myfile <> "False" Then
+r.ExportAsFixedFormat Type:=xlTypePDF, Filename:= _
+myfile, Quality:=xlQualityStandard, IncludeDocProperties:=True, _
+IgnorePrintAreas:=False, OpenAfterPublish:=True
+Else
+MsgBox "No File Selected. PDF will not be saved", vbOKOnly, "No File Selected"
+End If
+End Sub
+
+
+
+
+#Q3C
+
+Sub Highlight_Misspelled_Words()
+Dim cell As Range
+For Each cell In ActiveSheet.UsedRange
+If Not Application.CheckSpelling(Word:=cell.Text) Then cell.Interior.ColorIndex = 6
+Next
+End Sub
